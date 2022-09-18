@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NotesApp</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="login_into_your_account">Login into Your Account</string>
+    <string name="email">Email</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="password">Password</string>
+    <string name="enter_your_password">Enter Your Password</string>
+    <string name="login">Login</string>
+    <string name="proceed">Proceed</string>
+</resources>
