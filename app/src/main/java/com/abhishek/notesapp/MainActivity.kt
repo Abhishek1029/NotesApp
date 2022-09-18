@@ -8,16 +8,19 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import com.abhishek.notesapp.database.NoteDatabase
 import com.abhishek.notesapp.ui.login.LoginComposable
 import com.abhishek.notesapp.ui.login.RegistrationComposable
 import com.abhishek.notesapp.ui.theme.NotesAppTheme
 
 class MainActivity : ComponentActivity() {
+    private var notesDatabase: NoteDatabase? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
