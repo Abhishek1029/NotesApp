@@ -1,10 +1,11 @@
 package com.abhishek.notesapp.ui.login
 
-import android.content.Context
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,14 +14,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.abhishek.notesapp.NotesApp
 import com.abhishek.notesapp.R
 
 
 @Composable
 fun LoginComposable(
     modifier: Modifier = Modifier,
-    context: Context?
+    onLoginClick: () -> Unit,
+    onTextClick: () -> Unit
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,13 +42,15 @@ fun LoginComposable(
             R.string.enter_your_password,
             MaterialTheme.colors.onSecondary,
         )
-        ButtonComposable(buttonText = R.string.proceed,
-            onLoginClick = {
-                Toast.makeText(
-                    context,
-                    "Login CLicked", Toast.LENGTH_SHORT
-                ).show()
-            })
+        ButtonComposable(
+            buttonText = R.string.proceed,
+            onClick = onLoginClick
+        )
+        LoginSignUpComposable(
+            text = R.string.do_not_have_an_account,
+            clickableText = R.string.signup_here,
+            onTextClick = onTextClick
+        )
     }
 }
 
@@ -95,10 +98,10 @@ fun HeadingComposable(
 fun ButtonComposable(
     modifier: Modifier = Modifier,
     @StringRes buttonText: Int,
-    onLoginClick: () -> Unit
+    onClick: () -> Unit
 ) {
     Button(
-        onClick = onLoginClick,
+        onClick = onClick,
         modifier = modifier
             .width(130.dp)
             .padding(0.dp, 20.dp, 0.dp, 0.dp)
@@ -129,11 +132,15 @@ fun TextFieldComposablePreview() {
 @Preview
 @Composable
 fun ButtonComposablePreview() {
-    ButtonComposable(buttonText = R.string.proceed, onLoginClick = {})
+    ButtonComposable(buttonText = R.string.proceed, onClick = {})
 }
+
 
 @Preview
 @Composable
 fun LoginComposablePreview() {
-    LoginComposable(context = null)
+    LoginComposable(
+        onLoginClick = {},
+        onTextClick = {}
+    )
 }

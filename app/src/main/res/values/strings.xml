@@ -8,4 +8,13 @@
     <string name="enter_your_password">Enter Your Password</string>
     <string name="login">Login</string>
     <string name="proceed">Proceed</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="name">Name</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="re_enter_your_password">Re-enter Your Password</string>
+    <string name="do_not_have_an_account">Do not have an account? </string>
+    <string name="signup_here">Signup Here!</string>
+    <string name="already_have_an_account">Already have an account? </string>
+    <string name="login_here">Login Here!</string>
 </resources>
