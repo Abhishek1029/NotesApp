@@ -2,11 +2,8 @@ package com.abhishek.notesapp.ui.login
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -66,14 +63,22 @@ fun TextFieldComposable(
             .fillMaxWidth()
             .padding(20.dp, 20.dp, 20.dp, 0.dp)
     ) {
+        var text by remember {
+            mutableStateOf("")
+        }
         Text(
             text = stringResource(id = labelText),
             color = textColor,
             style = MaterialTheme.typography.h6,
         )
-        TextField(
-            value = stringResource(id = hint),
-            onValueChange = {},
+        OutlinedTextField(
+            value = text,
+            onValueChange = { newText ->
+                text = newText
+            },
+            label = {
+                Text(text = stringResource(id = hint))
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(0.dp, 5.dp, 0.dp, 0.dp)
