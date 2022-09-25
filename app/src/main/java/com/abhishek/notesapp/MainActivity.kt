@@ -16,7 +16,9 @@ import com.abhishek.notesapp.ui.login.LauncherScreen
 import com.abhishek.notesapp.ui.login.LoginComposable
 import com.abhishek.notesapp.ui.login.RegistrationComposable
 import com.abhishek.notesapp.ui.theme.NotesAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private var notesDatabase: NoteDatabase? = null
     override fun onCreate(savedInstanceState: Bundle?) {

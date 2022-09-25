@@ -1,6 +1,6 @@
 package com.abhishek.notesapp.di
 
-/*import android.app.Application
+import android.app.Application
 import androidx.room.Room
 import com.abhishek.notesapp.database.NoteDatabase
 import com.abhishek.notesapp.utils.Constants
@@ -21,4 +21,4 @@ object AppModule {
         NoteDatabase::class.java,
         Constants.ROOM_DATABASE_NAME
     ).build()
-}*/
+}
