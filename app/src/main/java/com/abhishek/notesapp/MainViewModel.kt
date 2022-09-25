@@ -1,5 +1,6 @@
 package com.abhishek.notesapp
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abhishek.notesapp.data.Note
@@ -16,7 +17,12 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
     val notesSF: StateFlow<List<Note>>
         get() = _notesMSF
 
+    init {
+        getNotes()
+    }
+
     fun saveNotes(note: Note) {
+        Log.e("saveNotes: ", note.text)
         viewModelScope.launch {
             repository.saveNotes(note)
         }

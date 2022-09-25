@@ -1,8 +1,6 @@
 package com.abhishek.notesapp.ui.notes
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.abhishek.notesapp.MainViewModel
@@ -14,10 +12,18 @@ fun NotesScreen(
     mainViewModel: MainViewModel = viewModel()
 ) {
     val notesList: List<Note>? by mainViewModel.notesSF.collectAsState()
+    var noteText by remember {
+        mutableStateOf("")
+    }
     if (notesList.isNullOrEmpty()) {
-        notesList?.let {
-            NotesListComposable(notesList = it)
-        }
+        AddNotes(
+            onButtonClick = {
+                mainViewModel.saveNotes(Note(text = noteText, description = noteText))
+            },
+            onTextChange = {
+                noteText = it
+            }
+        )
     } else {
         notesList?.let {
             NotesListComposable(notesList = it)

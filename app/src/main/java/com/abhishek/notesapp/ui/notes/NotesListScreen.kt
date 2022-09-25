@@ -1,17 +1,17 @@
 package com.abhishek.notesapp.ui.notes
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.FloatingActionButton
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.abhishek.notesapp.R
 import com.abhishek.notesapp.data.Note
 
@@ -25,7 +25,7 @@ fun NotesListComposable(
             AddNoteFABComposable()
         }
     ) {
-        LazyColumn(modifier) {
+        LazyColumn(modifier.fillMaxWidth()) {
             items(notesList) { note ->
                 NoteComposable(note = note)
             }
@@ -54,9 +54,24 @@ fun NoteComposable(
     modifier: Modifier = Modifier,
     note: Note
 ) {
-    Column(modifier) {
-        Text(text = note.text)
-        Text(text = note.description)
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(5.dp),
+        shape = MaterialTheme.shapes.medium.copy(CornerSize(5.dp)),
+        elevation = 4.dp
+    ) {
+        Column(modifier) {
+            Text(
+                text = note.text,
+                Modifier.padding(start = 5.dp, end = 5.dp)
+            )
+            Spacer(modifier = Modifier.size(5.dp))
+            Text(
+                text = note.description,
+                Modifier.padding(start = 5.dp, end = 5.dp)
+            )
+        }
     }
 }
 

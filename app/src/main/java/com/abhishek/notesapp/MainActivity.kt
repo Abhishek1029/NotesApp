@@ -15,12 +15,12 @@ import com.abhishek.notesapp.database.NoteDatabase
 import com.abhishek.notesapp.ui.login.LauncherScreen
 import com.abhishek.notesapp.ui.login.LoginComposable
 import com.abhishek.notesapp.ui.login.RegistrationComposable
+import com.abhishek.notesapp.ui.notes.NotesScreen
 import com.abhishek.notesapp.ui.theme.NotesAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private var notesDatabase: NoteDatabase? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -34,9 +34,10 @@ class MainActivity : ComponentActivity() {
                         mutableStateOf(true)
                     }
                     if (showLandingScreen) {
-                        LauncherScreen(onTimeout = {showLandingScreen = false})
+                        LauncherScreen(onTimeout = { showLandingScreen = false })
                     } else {
-                        LaunchLoginOrRegistrationScreen()
+                        NotesScreen()
+                        // LaunchLoginOrRegistrationScreen()
                     }
                 }
             }
