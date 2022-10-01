@@ -18,7 +18,7 @@ import com.abhishek.notesapp.data.Note
 @Composable
 fun NotesListComposable(
     modifier: Modifier = Modifier,
-    notesList: List<Note>
+    notesList: List<Note> = emptyList()
 ) {
     Scaffold(modifier = modifier,
         floatingActionButton = {
