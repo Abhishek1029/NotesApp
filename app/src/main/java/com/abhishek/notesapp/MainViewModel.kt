@@ -4,11 +4,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abhishek.notesapp.data.Note
+import com.abhishek.notesapp.data.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,6 +35,14 @@ class MainViewModel @Inject constructor(private val repository: MainRepository) 
             repository.getNotes().collect {
                 _notesMSF.value = it
             }
+        }
+    }
+
+    suspend fun insertUser(
+        user: User
+    ) {
+        viewModelScope.launch {
+            repository.insertUser(user)
         }
     }
 }

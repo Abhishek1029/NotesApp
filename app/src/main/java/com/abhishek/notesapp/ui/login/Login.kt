@@ -32,13 +32,17 @@ fun LoginComposable(
         TextFieldComposable(
             R.string.email,
             R.string.enter_your_email,
-            MaterialTheme.colors.onSecondary,
-        )
+            textColor = MaterialTheme.colors.onSecondary,
+        ) {
+
+        }
         TextFieldComposable(
             R.string.password,
             R.string.enter_your_password,
-            MaterialTheme.colors.onSecondary,
-        )
+            textColor = MaterialTheme.colors.onSecondary,
+        ) {
+
+        }
         ButtonComposable(
             buttonText = R.string.proceed,
             onClick = onLoginClick
@@ -55,7 +59,8 @@ fun LoginComposable(
 fun TextFieldComposable(
     @StringRes labelText: Int,
     @StringRes hint: Int,
-    textColor: Color
+    textColor: Color,
+    onTextChanged: (String) -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.Start,
@@ -75,6 +80,7 @@ fun TextFieldComposable(
             value = text,
             onValueChange = { newText ->
                 text = newText
+                onTextChanged(newText)
             },
             label = {
                 Text(text = stringResource(id = hint))
@@ -130,7 +136,8 @@ fun TextFieldComposablePreview() {
     TextFieldComposable(
         R.string.email,
         R.string.enter_your_email,
-        MaterialTheme.colors.onSecondary,
+        textColor = MaterialTheme.colors.onSecondary,
+        onTextChanged = {}
     )
 }
 

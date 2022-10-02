@@ -7,13 +7,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.abhishek.notesapp.NotesApp
 import com.abhishek.notesapp.data.Note
+import com.abhishek.notesapp.data.User
 import com.abhishek.notesapp.utils.Constants
 
-@Database(entities = [Note::class], version = 1)
+@Database(entities = [Note::class, User::class], version = 1)
 abstract class NoteDatabase : RoomDatabase() {
     abstract fun getNotesDao(): NoteDao
+    abstract fun getUserDao(): UserDao
 
-    companion object {
+/*    companion object {
         var INSTANCE: NoteDatabase? = null
         fun getDatabase(context: Context): NoteDatabase? {
             if (INSTANCE == null)
@@ -24,5 +26,5 @@ abstract class NoteDatabase : RoomDatabase() {
                 ).build()
             return INSTANCE
         }
-    }
+    }*/
 }

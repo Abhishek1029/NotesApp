@@ -11,6 +11,8 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -70,9 +72,10 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(SignupDestination.route) {
-                            RegistrationComposable(onRegistrationClick = {
-                                showToast("Registration CLicked")
-                            }) {
+                            RegistrationComposable(
+                                viewModel = hiltViewModel(),
+                                navController = navController
+                            ) {
                                 navController.navigateWithSingleTop(LoginDestination.route)
                             }
                         }

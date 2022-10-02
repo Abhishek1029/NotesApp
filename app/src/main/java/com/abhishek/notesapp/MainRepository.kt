@@ -1,11 +1,14 @@
 package com.abhishek.notesapp
 
 import com.abhishek.notesapp.data.Note
+import com.abhishek.notesapp.data.User
 import com.abhishek.notesapp.database.NoteDatabase
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class MainRepository @Inject constructor(private val notesDatabase: NoteDatabase) {
+class MainRepository @Inject constructor(
+    private val notesDatabase: NoteDatabase
+) {
     suspend fun saveNotes(note: Note) {
         notesDatabase
             .getNotesDao()
@@ -18,5 +21,10 @@ class MainRepository @Inject constructor(private val notesDatabase: NoteDatabase
                 .getNotesDao()
                 .getNotes()
         )
+    }
+
+    suspend fun insertUser(user: User) {
+        notesDatabase.getUserDao()
+            .insertUser(user)
     }
 }
