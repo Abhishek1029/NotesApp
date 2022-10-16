@@ -58,15 +58,16 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(LoginDestination.route) {
-                            LoginComposable(modifier = Modifier
-                                .fillMaxSize()
-                                .background(
-                                    color = Color.Blue
-                                        .copy(alpha = 0.2f)
-                                ),
-                                onLoginClick = {
-                                    showToast("Login CLicked")
-                                }) {
+                            LoginComposable(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .background(
+                                        color = Color.Blue
+                                            .copy(alpha = 0.2f)
+                                    ),
+                                hiltViewModel(),
+                                navController
+                            ) {
                                 navController.navigateWithSingleTop(SignupDestination.route)
                             }
                         }
@@ -81,7 +82,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(NotesListDestination.route) {
-                            NotesListComposable()
+                            NotesListComposable(navController = navController)
                         }
 
                         composable(AddNotesDestination.route) {

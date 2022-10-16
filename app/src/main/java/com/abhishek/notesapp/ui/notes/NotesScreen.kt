@@ -26,7 +26,7 @@ fun NotesScreen(
         )
     } else {
         notesList?.let {
-            NotesListComposable(notesList = it)
+            NotesListComposable(notesList = it, navController = null)
         }
     }
 }

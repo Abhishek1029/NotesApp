@@ -84,7 +84,8 @@ fun RegistrationComposable(
         ButtonComposable(
             buttonText = R.string.proceed,
         ) {
-            coroutineScope.launch(Dispatchers.IO) {
+            navController?.navigate(NotesListDestination.route)
+            /*coroutineScope.launch(Dispatchers.IO) {
                 val pair = Helper.isDataValid(name, email, password, confirmPassword)
                 if (pair.first) {
                     viewModel.signupUser(name, email, password)
@@ -93,7 +94,7 @@ fun RegistrationComposable(
                         context.showToast(pair.second)
                     }
                 }
-            }
+            }*/
         }
         LoginSignUpComposable(
             text = R.string.already_have_an_account,

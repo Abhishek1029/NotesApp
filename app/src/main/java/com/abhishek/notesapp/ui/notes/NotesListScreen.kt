@@ -12,17 +12,22 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.abhishek.notesapp.R
 import com.abhishek.notesapp.data.Note
+import com.abhishek.notesapp.ui.navigation.AddNotesDestination
 
 @Composable
 fun NotesListComposable(
     modifier: Modifier = Modifier,
-    notesList: List<Note> = emptyList()
+    notesList: List<Note> = emptyList(),
+    navController: NavController?
 ) {
     Scaffold(modifier = modifier,
         floatingActionButton = {
-            AddNoteFABComposable()
+            AddNoteFABComposable {
+                navController?.navigate(AddNotesDestination.route)
+            }
         }
     ) {
         LazyColumn(modifier.fillMaxWidth()) {
@@ -35,10 +40,13 @@ fun NotesListComposable(
 
 @Composable
 fun AddNoteFABComposable(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onFloatingIconClick: () -> Unit
 ) {
     FloatingActionButton(
-        onClick = { },
+        onClick = {
+            onFloatingIconClick()
+        },
         backgroundColor = Color.Magenta
     ) {
         Icon(
@@ -78,11 +86,15 @@ fun NoteComposable(
 @Preview
 @Composable
 fun AddNoteFABPreview() {
-    AddNoteFABComposable()
+    AddNoteFABComposable {
+
+    }
 }
 
 @Preview
 @Composable
 fun NotesListPreview() {
-    NotesListComposable(notesList = emptyList())
+    NotesListComposable(
+        navController = null
+    )
 }

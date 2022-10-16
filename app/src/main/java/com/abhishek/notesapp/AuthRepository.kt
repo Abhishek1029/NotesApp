@@ -1,9 +1,16 @@
 package com.abhishek.notesapp
 
+import android.util.Log
 import com.abhishek.notesapp.utils.Utility
+import com.abhishek.notesapp.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.delay
 import javax.inject.Inject
+import kotlin.math.log
+
+private const val TAG = "AuthRepository"
 
 interface AuthRepository {
     val currentUser: FirebaseUser?
@@ -30,32 +37,20 @@ class AuthRepositoryImpl @Inject constructor(
         email: String,
         password: String
     ): FirebaseUser? {
-        var user: FirebaseUser? = null
-        firebaseAuth.createUserWithEmailAndPassword(
+        val user = firebaseAuth.createUserWithEmailAndPassword(
             email, password
-        ).addOnCompleteListener {
-            user = if (it.isSuccessful) {
-                it.result.user
-            } else {
-                null
-            }
-        }
-        return user
+        ).await()
+        user?.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())
+            ?.await()
+        return user?.user
     }
 
     override suspend fun loginUser(email: String, password: String): FirebaseUser? {
-        var user: FirebaseUser? = null
-        firebaseAuth.signInWithEmailAndPassword(
+        val user = firebaseAuth.signInWithEmailAndPassword(
             email,
             password
-        ).addOnCompleteListener {
-            user = if (it.isSuccessful) {
-                it.result.user
-            } else {
-                null
-            }
-        }
-        return user
+        ).await()
+        return user?.user
     }
 
 }

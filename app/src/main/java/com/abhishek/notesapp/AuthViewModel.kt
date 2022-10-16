@@ -1,14 +1,20 @@
 package com.abhishek.notesapp
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+private const val TAG = "AuthViewModel"
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
@@ -30,12 +36,8 @@ class AuthViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             val user = authRepository.signupUser(name, email, password)
-            user?.updateProfile(
-                UserProfileChangeRequest.Builder()
-                    .setDisplayName(name).build()
-            )?.addOnCompleteListener {
-                _signupFlow.value = user
-            }
+            Log.e(TAG, "signupUser: $user")
+            _signupFlow.value = user
         }
     }
 
